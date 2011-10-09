@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
+    <meta>
+        <author>Andrew Wooldridge</author>
+    </meta>
+    <bindings>
+        <select itemPath="" produces="XML">
+            <urls>
+                <url></url>
+            </urls>
+            <inputs>
+                <key id="query" type="xs:string" paramType="variable" required="true"/>
+            </inputs>
+            <execute>
+                <![CDATA[
+                    // js stuff
+                    
+                    response.object = <result>
+                        <data>Hello {query}</data>    
+                    </result>
+                ]]>
+            </execute>
+        </select>
+    </bindings>
+</table>
