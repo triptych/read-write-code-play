@@ -2,6 +2,8 @@
 <table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
     <meta>
         <author>Andrew Wooldridge</author>
+        <documentationURL>http://readwritecodeplay.com</documentationURL>  
+  <sampleQuery>select * from {table} where query="something"</sampleQuery> 
     </meta>
     <bindings>
         <select itemPath="" produces="XML">
@@ -13,7 +15,7 @@
             </inputs>
             <execute>
                 <![CDATA[
-                    // js stuff
+                    /** js stuff **/
                     
                     response.object = <result>
                         <data>Hello {query}</data>    
