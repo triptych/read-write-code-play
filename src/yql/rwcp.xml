@@ -3,7 +3,7 @@
     <meta>
         <author>Andrew Wooldridge</author>
         <documentationURL>http://readwritecodeplay.com</documentationURL>  
-  <sampleQuery>select * from {table} where query="something"</sampleQuery> 
+  <sampleQuery>select * from {table} where type="something"</sampleQuery> 
     </meta>
     <bindings>
         <select itemPath="" produces="XML">
@@ -11,14 +11,14 @@
                 <url></url>
             </urls>
             <inputs>
-                <key id="query" type="xs:string" paramType="variable" required="true"/>
+                <key id="type" type="xs:string" paramType="variable" required="true"/>
             </inputs>
             <execute>
                 <![CDATA[
                     /** js stuff **/
                     
                     response.object = <result>
-                        <data>Hello {query}</data>    
+                        <data>Hello {type}</data>    
                     </result>
                 ]]>
             </execute>
