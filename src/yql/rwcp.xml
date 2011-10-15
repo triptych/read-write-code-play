@@ -16,7 +16,7 @@
             <execute>
                 <![CDATA[
                     /** js stuff **/
-                    var results = y.query("select * from csv where url='https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0Al25RpMEgV12dGVNMDZzNHU3R2hfSTFEV0pMeW13SFE&output=csv' and columns='suggestion,type'");
+                    var results = y.query("select * from csv where url='https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0Al25RpMEgV12dGVNMDZzNHU3R2hfSTFEV0pMeW13SFE&output=csv' and columns='suggestion,type,duration,suggestedby' and type='{type}'");
                     y.log(results);
                     response.object = <result>
                         <data>Hello {type}</data>    
