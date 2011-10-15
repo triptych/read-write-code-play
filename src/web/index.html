@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Read. Write. Code. Play.</title>
+<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+<script>
+YUI().use("node","event","yql" ,function(Y){
+    Y.log("YUI loaded!");
+    Y.on("domready", function(){
+        Y.YQL('use "https://raw.github.com/triptych/read-write-code-play/master/src/yql/rwcp.xml" as table; select * from table where type="*" ', function(r){
+            Y.log(r);
+            var responseArr = r.query.results.result.data.results.row
+            Y.log(responseArr);
+            var responseMsg = responseArr[Math.floor(Math.random() * responseArr.length-1)];
+            Y.log(responseMsg);
+            var responseTxt = responseMsg.type + " : " + responseMsg.suggestion;
+            Y.log(responseTxt);
+            Y.one(".answer").setContent(responseTxt);
+            });
+           
+        })
+
+    })
+
+</script>
+    </head>
+    <body>
+        <h1>Read? Write? Code? Play?</h1>
+        <div>
+            <h2>Your answer</h2>
+            <span class="answer"></span>
+        </div>
+    
+    </body>
+</html>
