@@ -18,12 +18,14 @@
                     /** js stuff **/
                     var resultsPrefix = "select * from csv where url='https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0Al25RpMEgV12dGVNMDZzNHU3R2hfSTFEV0pMeW13SFE&output=csv' and columns='suggestion,type,duration,suggestedby' ";
                     var resultsPostfix = "";
+                    var resultsSort = " | sort(field='type')";
+                    
                     if(type != "*"){
                         resultsPostfix = " and type='" + type + "'";
 
                     } 
-                    results = y.query(resultsPrefix + resultsPostfix).results;
-                    
+                    results = y.query(resultsPrefix + resultsPostfix + resultsSort).results;
+                    y.log('testing with sort');
                     y.log(results);
                     response.object = <result>
                         <data><type>{type}</type>
