@@ -1,37 +1,83 @@
 <html>
     <head>
-        <title>Read. Write. Code. Play.</title>
-<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
-<script>
-YUI().use("node","event","yql" ,function(Y){
-    Y.log("YUI loaded!");
-    Y.on("domready", function(){
-        Y.YQL('use "https://raw.github.com/triptych/read-write-code-play/master/src/yql/rwcp.xml" as table; select * from table where type="*" ', function(r){
-                Y.log("response:");
-                Y.log(r);
-                var responseArr = r.query.results.result.data.results.row
-                var idx = Math.floor(Math.random() * responseArr.length);
-                Y.log(idx);
-                Y.log(responseArr);
-                var responseMsg = responseArr[idx];
-                Y.log(responseMsg);
-                var responseTxt = responseMsg.type + " : " + responseMsg.suggestion;
-                Y.log(responseTxt);
-                Y.one(".answer").setContent(responseTxt);
-            });
-           
-        })
+        <title>Read? Write? Code? Play?</title>
+        <!-- help from http://www.markdotto.com/2011/01/05/3d-text-using-just-css/ -->
+        <script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+        <script>
+        YUI().use("node","event","yql" ,function(Y){
+            Y.log("YUI loaded!");
+            Y.on("domready", function(){
+                return 0;
+                Y.YQL('use "https://raw.github.com/triptych/read-write-code-play/master/src/yql/rwcp.xml" as table; select * from table where type="*" ', function(r){
+                        Y.log("response:");
+                        Y.log(r);
+                        var responseArr = r.query.results.result.data.results.row
+                        var idx = Math.floor(Math.random() * responseArr.length);
+                        Y.log(idx);
+                        Y.log(responseArr);
+                        var responseMsg = responseArr[idx];
+                        Y.log(responseMsg);
+                        var responseTxt = responseMsg.type + " : " + responseMsg.suggestion;
+                        Y.log(responseTxt);
+                        Y.one(".answer").setContent(responseTxt);
+                    });
+                   
+                })
 
-    })
+            })
 
-</script>
+        </script>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset-min.css">
+        <style>
+            .mod{
+                height: 100%;
+                width: 100%;
+                xbackground: -webkit-radial-gradient(center, ellipse cover, #cb60b3 0%,#ad1283 50%,#de47ac 100%);
+                xbackground: -webkit-radial-gradient(center, ellipse cover, #472bad 0%,#796daa 50%,#472bad 100%);
+                background: -webkit-radial-gradient(center, ellipse cover, #b295e5 0%,#9b5ec4 47%,#6448a5 100%);
+            }
+
+            .word {
+                
+                font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+                color: white;
+                  text-shadow: 0 1px 0 #ccc, 
+                    0 2px 0 #c9c9c9,
+                    0 3px 0 #bbb,
+                    0 4px 0 #b9b9b9,
+                    0 5px 0 #aaa,
+                    0 6px 1px rgba(0,0,0,.1),
+                    0 0 5px rgba(0,0,0,.1),
+                    0 1px 3px rgba(0,0,0,.3),
+                    0 3px 5px rgba(0,0,0,.2),
+                    0 5px 10px rgba(0,0,0,.25),
+                    0 10px 10px rgba(0,0,0,.2),
+                    0 20px 20px rgba(0,0,0,.15);
+            }
+        </style>
     </head>
     <body>
-        <h1>Read? Write? Code? Play?</h1>
-        <div>
-            <h2>Your answer</h2>
-            <span class="answer"></span>
+        <div class="mod">
+            <div class="hd">
+                <div class="read word">Read</div>
+                <div class="write word">Write</div>
+                <div class="question word" >?</div>
+                <div class="code word">Code</div>
+                <div class="play word">Play</div>
+            </div>
+            <div class="bd">
+                <div>
+                    <h2>Your answer</h2>
+                    <span class="answer"></span>
+                </div>
+            </div>
+            <div class="ft">
+                <span class="attribution">Created by Andrew Wooldridge</span>
+
+            </div>
+
         </div>
+       
     
     </body>
 </html>
