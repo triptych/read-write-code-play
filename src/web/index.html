@@ -7,14 +7,17 @@ YUI().use("node","event","yql" ,function(Y){
     Y.log("YUI loaded!");
     Y.on("domready", function(){
         Y.YQL('use "https://raw.github.com/triptych/read-write-code-play/master/src/yql/rwcp.xml" as table; select * from table where type="*" ', function(r){
-            Y.log(r);
-            var responseArr = r.query.results.result.data.results.row
-            Y.log(responseArr);
-            var responseMsg = responseArr[Math.floor(Math.random() * responseArr.length-1)];
-            Y.log(responseMsg);
-            var responseTxt = responseMsg.type + " : " + responseMsg.suggestion;
-            Y.log(responseTxt);
-            Y.one(".answer").setContent(responseTxt);
+                Y.log("response:");
+                Y.log(r);
+                var responseArr = r.query.results.result.data.results.row
+                var idx = Math.floor(Math.random() * responseArr.length);
+                Y.log(idx);
+                Y.log(responseArr);
+                var responseMsg = responseArr[idx];
+                Y.log(responseMsg);
+                var responseTxt = responseMsg.type + " : " + responseMsg.suggestion;
+                Y.log(responseTxt);
+                Y.one(".answer").setContent(responseTxt);
             });
            
         })
