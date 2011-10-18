@@ -162,7 +162,15 @@ to {
 .result .answer {
     font-size: .2em; 
     display: block;
-   padding-top: 32px;
+   margin-top: 32px;
+   padding-top: 16px;
+   padding-bottom: 16px;
+   border: 1px solid #EFEFEF;
+}
+
+.result .suggest {
+    font-size: .2em;
+    padding-top: 8px;
 }
 
 div.close {
@@ -203,4 +211,8 @@ div.close {
     cursor: pointer;
     color: #FFF;
 
+}
+
+.share {
+    padding-top: 8px;
 }
