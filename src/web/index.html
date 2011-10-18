@@ -9,38 +9,62 @@
             Y.on("domready", function(){
                 return 0;
                 Y.YQL('use "https://raw.github.com/triptych/read-write-code-play/master/src/yql/rwcp.xml" as table; select * from table where type="*" ', function(r){
-                        Y.log("response:");
-                        Y.log(r);
                         var responseArr = r.query.results.result.data.results.row
                         var idx = Math.floor(Math.random() * responseArr.length);
-                        Y.log(idx);
-                        Y.log(responseArr);
                         var responseMsg = responseArr[idx];
-                        Y.log(responseMsg);
                         var responseTxt = responseMsg.type + " : " + responseMsg.suggestion;
-                        Y.log(responseTxt);
                         Y.one(".answer").setContent(responseTxt);
                     });
                    
-                })
+                });
 
-            })
+                Y.one(".read").setStyle("top", "-"+ parseInt(Y.one(".read").getStyle("height"))/2);
+                Y.one(".read").setStyle("left", "-"+ parseInt(Y.one(".read").getStyle("width"))/2);
+
+                Y.one(".write").setStyle("top", "-"+ parseInt(Y.one(".write").getStyle("height"))/2);
+                Y.one(".write").setStyle("right", "-"+ parseInt(Y.one(".write").getStyle("width"))/2);
+
+                Y.one(".code").setStyle("bottom", "-"+ parseInt(Y.one(".read").getStyle("height"))/2);
+                Y.one(".code").setStyle("left", "-"+ parseInt(Y.one(".read").getStyle("width"))/2);
+
+                Y.one(".play").setStyle("bottom", "-"+ parseInt(Y.one(".read").getStyle("height"))/2);
+                Y.one(".play").setStyle("right", "-"+ parseInt(Y.one(".read").getStyle("width"))/2);
+
+
+            });
+
 
         </script>
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset-min.css">
         <style>
+            body {
+                background-color: #6448a5;
+
+            }
             .mod{
-                height: 100%;
-                width: 100%;
+                height: 700px;
+                width: 700px;
                 xbackground: -webkit-radial-gradient(center, ellipse cover, #cb60b3 0%,#ad1283 50%,#de47ac 100%);
                 xbackground: -webkit-radial-gradient(center, ellipse cover, #472bad 0%,#796daa 50%,#472bad 100%);
-                background: -webkit-radial-gradient(center, ellipse cover, #b295e5 0%,#9b5ec4 47%,#6448a5 100%);
+                background: -webkit-radial-gradient(center, ellipse cover, #b295e5 0%,#9b5ec4 30%,#6448a5 60%);
+                position: relative;
+                margin: auto;
+            }
+
+            .hd {
+                height: 50%;
+                width: 50%;
+                top: 25%;
+                left: 25%;
+                position: absolute;
+                xbackground-color: rgba(20,20,20,.5);
             }
 
             .word {
                 
                 font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
-                color: white;
+                position: absolute;
+                color: #FFE;
                   text-shadow: 0 1px 0 #ccc, 
                     0 2px 0 #c9c9c9,
                     0 3px 0 #bbb,
@@ -54,16 +78,79 @@
                     0 10px 10px rgba(0,0,0,.2),
                     0 20px 20px rgba(0,0,0,.15);
             }
+
+            .read {
+                top: 0px;
+                left: 0px;
+            }
+
+            .write {
+                top: 0px;
+                right: 0px;
+            }
+
+            .code {
+                bottom: 0px;
+                left: 0px;
+            }
+
+            .play {
+                bottom: 0px;
+                right: 0px;
+            }
+            .question {
+                top: 38%;
+                left: 38%;
+                color: green;
+            }
+
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+}
+to { 
+    -webkit-transform: rotate(360deg);
+}
+}
+
+
+@-webkit-keyframes counterrotate {
+    from {
+        -webkit-transform: rotate(360deg);
+}
+to { 
+    -webkit-transform: rotate(0deg);
+}
+}
+.rotating 
+{
+    -webkit-animation-name:             rotate; 
+    -webkit-animation-duration:         120s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+.counterrotating 
+{
+    -webkit-animation-name:             counterrotate; 
+    -webkit-animation-duration:         120s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+
+
         </style>
     </head>
     <body>
         <div class="mod">
-            <div class="hd">
-                <div class="read word">Read</div>
-                <div class="write word">Write</div>
-                <div class="question word" >?</div>
-                <div class="code word">Code</div>
-                <div class="play word">Play</div>
+            <div class="hd rotating">
+                <div class="read word counterrotating">Read</div>
+                <div class="write word counterrotating">Write</div>
+                <div class="question word counterrotating" >?</div>
+                <div class="code word counterrotating">Code</div>
+                <div class="play word counterrotating">Play</div>
             </div>
             <div class="bd">
                 <div>
