@@ -216,3 +216,25 @@ div.close {
 .share {
     padding-top: 8px;
 }
+
+
+/** color cycle **/
+
+.colorcycle {
+    -webkit-animation-name: 'colorcycle';
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+
+@-webkit-keyframes colorcycle {
+    0%  { -webkit-text-fill-color: red;}
+    20% { -webkit-text-fill-color: green;}
+    40% { -webkit-text-fill-color: orange;}
+    60% { -webkit-text-fill-color: purple;}
+    80% { -webkit-text-fill-color: yellow;}
+    100% { -webkit-text-fill-color: blue; }
+}
+
