@@ -8,15 +8,9 @@
             Y.log("YUI loaded!");
             Y.on("domready", function(){
                 return 0;
-                Y.YQL('use "https://raw.github.com/triptych/read-write-code-play/master/src/yql/rwcp.xml" as table; select * from table where type="*" ', function(r){
-                        var responseArr = r.query.results.result.data.results.row
-                        var idx = Math.floor(Math.random() * responseArr.length);
-                        var responseMsg = responseArr[idx];
-                        var responseTxt = responseMsg.type + " : " + responseMsg.suggestion;
-                        Y.one(".answer").setContent(responseTxt);
-                    });
+
                    
-                });
+            });
 
                 Y.one(".read").setStyle("top", "-"+ parseInt(Y.one(".read").getStyle("height"))/2);
                 Y.one(".read").setStyle("left", "-"+ parseInt(Y.one(".read").getStyle("width"))/2);
@@ -29,6 +23,22 @@
 
                 Y.one(".play").setStyle("bottom", "-"+ parseInt(Y.one(".read").getStyle("height"))/2);
                 Y.one(".play").setStyle("right", "-"+ parseInt(Y.one(".read").getStyle("width"))/2);
+
+                Y.one(".question").on("click", function(){
+                    Y.YQL('use "https://raw.github.com/triptych/read-write-code-play/master/src/yql/rwcp.xml" as table; select * from table where type="*" ', 
+                        function(r){
+                            var responseArr = r.query.results.result.data.results.row
+                            var idx = Math.floor(Math.random() * responseArr.length);
+                            var responseMsg = responseArr[idx];
+                            var responseTxt = responseMsg.type + " : " + responseMsg.suggestion;
+                            Y.one(".answer").setContent(responseTxt);
+                            Y.one("body").addClass("showres");
+                        });
+                });
+
+                Y.one("div.close").on("click", function(){
+                    Y.one("body").removeClass("showres");
+                })
 
 
             });
@@ -58,6 +68,7 @@
                 left: 25%;
                 position: absolute;
                 xbackground-color: rgba(20,20,20,.5);
+                z-index: 200;
             }
 
             .word {
@@ -102,6 +113,7 @@
                 top: 38%;
                 left: 38%;
                 color: green;
+                cursor: pointer;
             }
 
 
@@ -139,21 +151,73 @@ to {
     -webkit-animation-timing-function: linear;
 }
 
+.ft {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
 
+.bd {
+    height: 50%;
+    width: 50%;
+    top: 25%;
+    left: 25%;
+    background-color: #000;
+    position: absolute;
+    box-shadow: 0px 0px 8px #FFF;
+    z-index: 200;
+    border-radius: 10%;
+    display: none;
+
+}
+
+.showres .bd {
+    display:block;
+}
+
+#carusel {
+    z-index: 1;
+}
+
+.result {
+    text-align: center;
+    font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 4px;
+    color: #FFF;
+    position: relative;
+
+}
+
+.result h2 {
+    font-size: .2em;
+}
+.result .answer {
+    font-size: .2em; 
+    display: block;
+   padding-top: 32px;
+}
+
+div.close {
+    font-size: .4em;
+    top: 8px;
+    right: 16px;
+    cursor: pointer;
+}
 
         </style>
     </head>
     <body>
         <div class="mod">
-            <div class="hd rotating">
+            <div class="hd rotating" id="carusel">
                 <div class="read word counterrotating">Read</div>
                 <div class="write word counterrotating">Write</div>
-                <div class="question word counterrotating" >?</div>
+                <div class="question word counterrotating" title="Got some free time? Let this help you decide what to do!" >?</div>
                 <div class="code word counterrotating">Code</div>
                 <div class="play word counterrotating">Play</div>
             </div>
             <div class="bd">
-                <div>
+                <div class="result">
+                    <div class="close word">X</div>
                     <h2>Your answer</h2>
                     <span class="answer"></span>
                 </div>
