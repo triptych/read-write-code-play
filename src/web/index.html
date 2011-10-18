@@ -3,208 +3,9 @@
         <title>Read? Write? Code? Play?</title>
         <!-- help from http://www.markdotto.com/2011/01/05/3d-text-using-just-css/ -->
         <script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
-        <script>
-        YUI().use("node","event","yql" ,function(Y){
-            Y.log("YUI loaded!");
-            Y.on("domready", function(){
-                return 0;
-
-                   
-            });
-
-                Y.one(".read").setStyle("top", "-"+ parseInt(Y.one(".read").getStyle("height"))/2);
-                Y.one(".read").setStyle("left", "-"+ parseInt(Y.one(".read").getStyle("width"))/2);
-
-                Y.one(".write").setStyle("top", "-"+ parseInt(Y.one(".write").getStyle("height"))/2);
-                Y.one(".write").setStyle("right", "-"+ parseInt(Y.one(".write").getStyle("width"))/2);
-
-                Y.one(".code").setStyle("bottom", "-"+ parseInt(Y.one(".read").getStyle("height"))/2);
-                Y.one(".code").setStyle("left", "-"+ parseInt(Y.one(".read").getStyle("width"))/2);
-
-                Y.one(".play").setStyle("bottom", "-"+ parseInt(Y.one(".read").getStyle("height"))/2);
-                Y.one(".play").setStyle("right", "-"+ parseInt(Y.one(".read").getStyle("width"))/2);
-
-                Y.one(".question").on("click", function(){
-                    Y.YQL('use "https://raw.github.com/triptych/read-write-code-play/master/src/yql/rwcp.xml" as table; select * from table where type="*" ', 
-                        function(r){
-                            var responseArr = r.query.results.result.data.results.row
-                            var idx = Math.floor(Math.random() * responseArr.length);
-                            var responseMsg = responseArr[idx];
-                            var responseTxt = responseMsg.type + " : " + responseMsg.suggestion;
-                            Y.one(".answer").setContent(responseTxt);
-                            Y.one("body").addClass("showres");
-                        });
-                });
-
-                Y.one("div.close").on("click", function(){
-                    Y.one("body").removeClass("showres");
-                })
-
-
-            });
-
-
-        </script>
+        <script src="js/rwcp.js"></script>
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset-min.css">
-        <style>
-            body {
-                background-color: #6448a5;
-
-            }
-            .mod{
-                height: 700px;
-                width: 700px;
-                xbackground: -webkit-radial-gradient(center, ellipse cover, #cb60b3 0%,#ad1283 50%,#de47ac 100%);
-                xbackground: -webkit-radial-gradient(center, ellipse cover, #472bad 0%,#796daa 50%,#472bad 100%);
-                background: -webkit-radial-gradient(center, ellipse cover, #b295e5 0%,#9b5ec4 30%,#6448a5 60%);
-                position: relative;
-                margin: auto;
-            }
-
-            .hd {
-                height: 50%;
-                width: 50%;
-                top: 25%;
-                left: 25%;
-                position: absolute;
-                xbackground-color: rgba(20,20,20,.5);
-                z-index: 200;
-            }
-
-            .word {
-                
-                font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
-                position: absolute;
-                color: #FFE;
-                  text-shadow: 0 1px 0 #ccc, 
-                    0 2px 0 #c9c9c9,
-                    0 3px 0 #bbb,
-                    0 4px 0 #b9b9b9,
-                    0 5px 0 #aaa,
-                    0 6px 1px rgba(0,0,0,.1),
-                    0 0 5px rgba(0,0,0,.1),
-                    0 1px 3px rgba(0,0,0,.3),
-                    0 3px 5px rgba(0,0,0,.2),
-                    0 5px 10px rgba(0,0,0,.25),
-                    0 10px 10px rgba(0,0,0,.2),
-                    0 20px 20px rgba(0,0,0,.15);
-            }
-
-            .read {
-                top: 0px;
-                left: 0px;
-            }
-
-            .write {
-                top: 0px;
-                right: 0px;
-            }
-
-            .code {
-                bottom: 0px;
-                left: 0px;
-            }
-
-            .play {
-                bottom: 0px;
-                right: 0px;
-            }
-            .question {
-                top: 38%;
-                left: 38%;
-                color: green;
-                cursor: pointer;
-            }
-
-
-@-webkit-keyframes rotate {
-    from {
-        -webkit-transform: rotate(0deg);
-}
-to { 
-    -webkit-transform: rotate(360deg);
-}
-}
-
-
-@-webkit-keyframes counterrotate {
-    from {
-        -webkit-transform: rotate(360deg);
-}
-to { 
-    -webkit-transform: rotate(0deg);
-}
-}
-.rotating 
-{
-    -webkit-animation-name:             rotate; 
-    -webkit-animation-duration:         120s; 
-    -webkit-animation-iteration-count:  infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-.counterrotating 
-{
-    -webkit-animation-name:             counterrotate; 
-    -webkit-animation-duration:         120s; 
-    -webkit-animation-iteration-count:  infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-.ft {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-}
-
-.bd {
-    height: 50%;
-    width: 50%;
-    top: 25%;
-    left: 25%;
-    background-color: #000;
-    position: absolute;
-    box-shadow: 0px 0px 8px #FFF;
-    z-index: 200;
-    border-radius: 10%;
-    display: none;
-
-}
-
-.showres .bd {
-    display:block;
-}
-
-#carusel {
-    z-index: 1;
-}
-
-.result {
-    text-align: center;
-    font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
-    padding: 4px;
-    color: #FFF;
-    position: relative;
-
-}
-
-.result h2 {
-    font-size: .2em;
-}
-.result .answer {
-    font-size: .2em; 
-    display: block;
-   padding-top: 32px;
-}
-
-div.close {
-    font-size: .4em;
-    top: 8px;
-    right: 16px;
-    cursor: pointer;
-}
-
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/rwcp.css">
     </head>
     <body>
         <div class="mod">
@@ -221,12 +22,22 @@ div.close {
                     <h2>Your answer</h2>
                     <span class="answer"></span>
                 </div>
+ 
             </div>
             <div class="ft">
+                <span class="about">About</span>
                 <span class="attribution">Created by Andrew Wooldridge</span>
+               
 
             </div>
 
+        </div>
+        <div class="info">
+                <div class="aboutcontent">
+                    Read Write Code Play is a simple website to help you decide what to do with your free time. Perhaps it is lunch time and you want to spend it wisely, but you are conflicted about what to do. Should you play? Should you write some code on your personal project?
+                    Share what you get on Twitter, and send more suggestions for things to do!
+                    <div class="dismiss">Let's Go!</div>
+                </div>
         </div>
        
     
