@@ -1,10 +1,8 @@
        YUI().use("node","event","yql" ,function(Y){
             Y.log("YUI loaded!");
             Y.on("domready", function(){
-                return 0;
+                
 
-                   
-            });
 
                 Y.one(".read").setStyle("top", "-"+ parseInt(Y.one(".read").getStyle("height"))/2);
                 Y.one(".read").setStyle("left", "-"+ parseInt(Y.one(".read").getStyle("width"))/2);
@@ -24,9 +22,18 @@
                     Y.YQL('use "https://raw.github.com/triptych/read-write-code-play/master/src/yql/rwcp.xml" as table; select * from table where type="*" ', 
                         function(r){
                             var responseArr = r.query.results.result.data.results.row
+                            Y.log(responseArr);
+
                             var idx = Math.floor(Math.random() * responseArr.length);
+                            
                             var responseMsg = responseArr[idx];
+
                             var responseTxt = responseMsg.type + " : " + responseMsg.suggestion;
+
+                            if(responseMsg.type = "type"){
+                              responseText = responseArr[0].type + " : " + responseMsg.suggestion;  
+                            };
+
                             Y.one(".answer").setContent(responseTxt);
                             Y.one("body").addClass("showres");
                         });
@@ -46,5 +53,10 @@
                     Y.one("body").addClass("showabout");
                 })
 
-
+                   
             });
+
+
+
+
+        });

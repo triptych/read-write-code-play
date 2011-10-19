@@ -12,9 +12,8 @@ body.showres .hd{
 .mod{
     height: 700px;
     width: 700px;
-    xbackground: -webkit-radial-gradient(center, ellipse cover, #cb60b3 0%,#ad1283 50%,#de47ac 100%);
-    xbackground: -webkit-radial-gradient(center, ellipse cover, #472bad 0%,#796daa 50%,#472bad 100%);
     background: -webkit-radial-gradient(center, ellipse cover, #b295e5 0%,#9b5ec4 30%,#6448a5 60%);
+    background:    -moz-radial-gradient(center, ellipse cover, #b295e5 0%,#9b5ec4 30%,#6448a5 60%);
     position: relative;
     margin: auto;
 }
@@ -25,7 +24,6 @@ body.showres .hd{
     top: 25%;
     left: 25%;
     position: absolute;
-    xbackground-color: rgba(20,20,20,.5);
     z-index: 200;
 }
 
@@ -90,17 +88,45 @@ to {
 @-webkit-keyframes counterrotate {
     from {
         -webkit-transform: rotate(360deg);
+    }
+    to { 
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+
+
+@-moz-keyframes rotate {
+    from {
+        -moz-transform: rotate(0deg);
 }
 to { 
-    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(360deg);
 }
 }
+
+
+@-moz-keyframes counterrotate {
+    from {
+        -moz-transform: rotate(360deg);
+    }
+    to { 
+        -moz-transform: rotate(0deg);
+    }
+}
+
+
 .rotating 
 {
     -webkit-animation-name:             rotate; 
     -webkit-animation-duration:         120s; 
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function: linear;
+
+    -moz-animation-name:             rotate; 
+    -moz-animation-duration:         120s; 
+    -moz-animation-iteration-count:  infinite;
+    -moz-animation-timing-function: linear;
 }
 
 .counterrotating 
@@ -109,6 +135,11 @@ to {
     -webkit-animation-duration:         120s; 
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function: linear;
+
+    -moz-animation-name:             counterrotate; 
+    -moz-animation-duration:         120s; 
+    -moz-animation-iteration-count:  infinite;
+    -moz-animation-timing-function: linear;
 }
 
 
@@ -217,15 +248,25 @@ div.close {
     padding-top: 8px;
 }
 
+.gplusbtn {
+    margin-top: 4px;
+}
 
 /** color cycle **/
 
 .colorcycle {
-    -webkit-animation-name: 'colorcycle';
+    -webkit-animation-name: colorcycle;
     -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-direction: alternate;
     -webkit-animation-timing-function: ease-in-out;
+
+
+    -moz-animation-name: colorcycle;
+    -moz-animation-duration: 1s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    -moz-animation-timing-function: ease-in-out;
 }
 
 
@@ -237,4 +278,14 @@ div.close {
     80% { -webkit-text-fill-color: yellow;}
     100% { -webkit-text-fill-color: blue; }
 }
+
+@-moz-keyframes colorcycle {
+    0%  { color: red;}
+    20% { color: green;}
+    40% { color: orange;}
+    60% { color: purple;}
+    80% { color: yellow;}
+    100% { color: blue; }
+}
+
 
